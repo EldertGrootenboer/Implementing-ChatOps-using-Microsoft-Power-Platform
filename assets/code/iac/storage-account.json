@@ -11,7 +11,7 @@
             "defaultValue": "my-container"
         },
         "tags": {
-            "type": "string",
+            "type": "object",
             "defaultValue": {
                 "LastModifiedDate": "[utcNow()]",
                 "Project": "Implementing ChatOps using Microsoft Power Platform"
