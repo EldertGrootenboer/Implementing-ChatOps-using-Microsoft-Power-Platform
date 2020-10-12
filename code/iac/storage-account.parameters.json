@@ -1,0 +1,19 @@
+{
+    "general": {
+        "value": {
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "LastModifiedDate": "[utcNow()]",
+                "Project": "Implementing ChatOps using Microsoft Power Platform"
+            }
+        }
+    },
+    "storageAccount": {
+        "value": {
+            "containers": {
+                "myContainer": "myContainer"
+            },
+            "name": "chatops"
+        }
+    }
+}
