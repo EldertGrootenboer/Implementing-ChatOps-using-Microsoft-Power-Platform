@@ -4,7 +4,6 @@
     "parameters": {
         "general": {
             "defaultValue": {
-                "location": "[resourceGroup().location]",
                 "tags": {
                     "LastModifiedDate": "[utcNow()]",
                     "Project": "Implementing ChatOps using Microsoft Power Platform"
@@ -15,19 +14,22 @@
         "storageAccount": {
             "defaultValue": {
                 "containers": {
-                    "myContainer": "[concat('st', uniqueString(resourceGroup().name))]"
+                    "myContainer": "myContainer"
                 },
-                "name": "myContainer"
+                "name": "chatops"
             },
             "type": "object"
         }
+    },
+    "variables":{
+        "storageAccountName": "[concat('st', parameters('storageAccount').name, uniqueString(resourceGroup().id))]"
     },
     "resources": [
         {
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-06-01",
-            "name": "[parameters('storageAccount').name]",
-            "location": "[parameters('general').location]",
+            "name": "[variables('storageAccountName')]",
+            "location": "[resourceGroup().location]",
             "tags": "[parameters('general').tags]",
             "sku": {
                 "name": "Standard_LRS",
@@ -59,9 +61,9 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('storageAccount').name, '/default')]",
+            "name": "[concat(variables('storageAccountName'), '/default')]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccount').name)]"
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
             ],
             "sku": {
                 "name": "Standard_LRS",
@@ -102,10 +104,10 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2019-06-01",
-            "name": "[concat(parameters('storageAccount').name, '/default/', parameters('storageAccount').containers.myContainer)]",
+            "name": "[concat(variables('storageAccountName'), '/default/', parameters('storageAccount').containers.myContainer)]",
             "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', parameters('storageAccount').name, 'default')]",
-                "[resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccount').name)]"
+                "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('storageAccountName'), 'default')]",
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
             ],
             "properties": {
                 "publicAccess": "None"
