@@ -2,27 +2,24 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "general": {
-            "defaultValue": {
-                "tags": {
-                    "LastModifiedDate": "[utcNow()]",
-                    "Project": "Implementing ChatOps using Microsoft Power Platform"
-                }
-            },
-            "type": "object"
+        "storageAccountName": {
+            "type": "string",
+            "defaultValue": "chatops"
         },
-        "storageAccount": {
+        "containerName": {
+            "type": "string",
+            "defaultValue": "my-container"
+        },
+        "tags": {
+            "type": "string",
             "defaultValue": {
-                "containers": {
-                    "myContainer": "myContainer"
-                },
-                "name": "chatops"
-            },
-            "type": "object"
+                "LastModifiedDate": "[utcNow()]",
+                "Project": "Implementing ChatOps using Microsoft Power Platform"
+            }
         }
     },
-    "variables":{
-        "storageAccountName": "[concat('st', parameters('storageAccount').name, uniqueString(resourceGroup().id))]"
+    "variables": {
+        "storageAccountName": "[concat('st', parameters('storageAccountName'), uniqueString(resourceGroup().id))]"
     },
     "resources": [
         {
@@ -30,7 +27,7 @@
             "apiVersion": "2019-06-01",
             "name": "[variables('storageAccountName')]",
             "location": "[resourceGroup().location]",
-            "tags": "[parameters('general').tags]",
+            "tags": "[parameters('tags')]",
             "sku": {
                 "name": "Standard_LRS",
                 "tier": "Standard"
@@ -104,7 +101,7 @@
         {
             "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
             "apiVersion": "2019-06-01",
-            "name": "[concat(variables('storageAccountName'), '/default/', parameters('storageAccount').containers.myContainer)]",
+            "name": "[concat(variables('storageAccountName'), '/default/', parameters('containerName'))]",
             "dependsOn": [
                 "[resourceId('Microsoft.Storage/storageAccounts/blobServices', variables('storageAccountName'), 'default')]",
                 "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
