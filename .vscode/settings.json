@@ -1,0 +1,8 @@
+{
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "logicAppEndpoint": "https://prod-24.westeurope.logic.azure.com:443/workflows/8ea02651c53f4bf5a0d4ab398df99c01/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=bel5IMjj1Lzy3LixuyrnBb-i6rop_QPHZ9YFrRcTp0g",
+            "powerAutomateEndpoint": "https://prod-185.westeurope.logic.azure.com:443/workflows/3eb93795244f486997a05b0f9860ebc5/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=r1cj_Xr-JM1JVmX63NnTuyBeHkOAd9Hiyv8XWRmcdcw"
+        }
+    }
+}

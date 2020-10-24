@@ -1,0 +1,50 @@
+POST {{powerAutomateEndpoint}}
+Content-Type: application/json
+
+{
+    "schemaId": "azureMonitorCommonAlertSchema",
+    "data": {
+        "essentials": {
+            "alertId": "/subscriptions/5d8fc530-7cff-4176-aa4d-232dfbcd5282/providers/Microsoft.AlertsManagement/alerts/7dbe3ff5-801d-4ae4-8695-6a6f4a35f825",
+            "alertRule": "ar-implementing-chatops-using-microsoft-power-platform",
+            "severity": "Sev2",
+            "signalType": "Metric",
+            "monitorCondition": "Fired",
+            "monitoringService": "Platform",
+            "alertTargetIDs": [
+                "/subscriptions/5d8fc530-7cff-4176-aa4d-232dfbcd5282/resourcegroups/rg-implementing-chatops-using-microsoft-power-platform/providers/microsoft.logic/workflows/logic-implementing-chatops-using-microsoft-power-platform"
+            ],
+            "originAlertId": "5d8fc530-7cff-4176-aa4d-232dfbcd5282_rg-implementing-chatops-using-microsoft-power-platform_microsoft.insights_metricalerts_ar-implementing-chatops-using-microsoft-power-platform_2030477577",
+            "firedDateTime": "2020-10-18T11:07:54.2747131Z",
+            "description": "",
+            "essentialsVersion": "1.0",
+            "alertContextVersion": "1.0"
+        },
+        "alertContext": {
+            "properties": null,
+            "conditionType": "SingleResourceMultipleMetricCriteria",
+            "condition": {
+                "windowSize": "PT1M",
+                "allOf": [
+                    {
+                        "metricName": "RunsFailed",
+                        "metricNamespace": "Microsoft.Logic/workflows",
+                        "operator": "GreaterThan",
+                        "threshold": "0",
+                        "timeAggregation": "Total",
+                        "dimensions": [
+                            {
+                                "name": "ResourceId",
+                                "value": "/SUBSCRIPTIONS/5D8FC530-7CFF-4176-AA4D-232DFBCD5282/RESOURCEGROUPS/RG-IMPLEMENTING-CHATOPS-USING-MICROSOFT-POWER-PLATFORM/PROVIDERS/MICROSOFT.LOGIC/WORKFLOWS/LOGIC-IMPLEMENTING-CHATOPS-USING-MICROSOFT-POWER-PLATFORM"
+                            }
+                        ],
+                        "metricValue": 1,
+                        "webTestName": null
+                    }
+                ],
+                "windowStartTime": "2020-10-18T11:03:44.756Z",
+                "windowEndTime": "2020-10-18T11:04:44.756Z"
+            }
+        }
+    }
+}
